@@ -209,11 +209,11 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ ordenId, data, patientData: e
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
         {patientFields.map((field, index) => (
           <div key={index} className={`${field.span} flex flex-col space-y-1`}>
             <span className="text-sm font-semibold text-slate-600">{field.label}</span>
-            <span className="text-sm text-slate-800 font-medium">{field.value}</span>
+            <span className="text-sm text-slate-800 font-medium break-words">{field.value}</span>
           </div>
         ))}
       </div>

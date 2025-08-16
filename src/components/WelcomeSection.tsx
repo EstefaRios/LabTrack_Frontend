@@ -37,17 +37,17 @@ export default function WelcomeSection() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 mb-6">
-      <div className="flex items-center space-x-6">
-        <div className="w-32 h-24 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center">
+    <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-4 sm:p-6 mb-6">
+      <div className="flex flex-col sm:flex-row items-center sm:space-x-6 space-y-4 sm:space-y-0">
+        <div className="w-24 h-20 sm:w-32 sm:h-24 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center flex-shrink-0">
           {getGenderImage() ? (
             <img 
                src={getGenderImage()!} 
                alt={sexoBiologico || 'Paciente'} 
-               className="w-20 h-20 object-contain"
+               className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
              />
           ) : (
-            <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 sm:w-8 sm:h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -58,11 +58,11 @@ export default function WelcomeSection() {
           )}
         </div>
 
-        <div className="flex-1">
-          <div className="flex items-center space-x-3 mb-2">
-            <h2 className="text-2xl font-bold text-slate-800 profile-title-animate">Hola, {nombrePaciente}</h2>
+        <div className="flex-1 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 mb-2">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 profile-title-animate break-words">Hola, {nombrePaciente}</h2>
           </div>
-          <p className="text-slate-600 text-lg welcome-portal-animate">{sexoBiologico === 'Femenino' ? 'Bienvenida' : 'Bienvenido'} al portal</p>
+          <p className="text-slate-600 text-base sm:text-lg welcome-portal-animate">{sexoBiologico === 'Femenino' ? 'Bienvenida' : 'Bienvenido'} al portal</p>
         </div>
       </div>
     </div>

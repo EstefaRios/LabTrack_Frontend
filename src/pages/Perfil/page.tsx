@@ -62,7 +62,7 @@ export default function PerfilPage() {
       <div className="flex relative z-10">
         <Sidebar activeItem="profile" />
 
-        <main className="flex-1 p-8 max-w-7xl">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl">
           <div className="space-y-6">
             <WelcomeSection />
             <ProfileCard profileData={profileData} />

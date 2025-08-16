@@ -92,9 +92,9 @@ const OrdenesTable: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">Órdenes de Laboratorio</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">Órdenes de Laboratorio</h1>
           <p className="text-slate-600 mt-1">Gestiona y consulta tus órdenes médicas</p>
         </div>
         <div className="flex items-center space-x-4">
@@ -104,7 +104,7 @@ const OrdenesTable: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
+      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-4 sm:p-6">
         <div className="flex items-center space-x-3 mb-4">
           <div className="p-2 bg-slate-100 rounded-lg">
             <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,11 +116,11 @@ const OrdenesTable: React.FC = () => {
               />
             </svg>
           </div>
-          <h2 className="text-lg font-semibold text-slate-800">Filtros de Búsqueda</h2>
+          <h2 className="text-base sm:text-lg font-semibold text-slate-800">Filtros de Búsqueda</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <label className="block text-sm font-semibold text-slate-700 mb-2">Número de orden</label>
             <input
               type="text"
@@ -180,78 +180,147 @@ const OrdenesTable: React.FC = () => {
             <p className="text-slate-500">Cargando órdenes...</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px]">
-              <thead className="bg-slate-50">
-                <tr>
-                  <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700">
-                    <input type="checkbox" className="rounded border-slate-300 text-teal-600 focus:ring-teal-400" />
-                  </th>
-                  <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Fecha</th>
-                  <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Documento</th>
-                  <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Número de Orden</th>
-                  <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ordenes.length === 0 ? (
+          <>
+            {/* Vista de tabla para pantallas grandes */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="w-full min-w-[640px]">
+                <thead className="bg-slate-50">
                   <tr>
-                    <td colSpan={5} className="px-6 py-8 text-center text-slate-500">
-                      No se encontraron órdenes
-                    </td>
+                    <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700">
+                      <input type="checkbox" className="rounded border-slate-300 text-teal-600 focus:ring-teal-400" />
+                    </th>
+                    <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Fecha</th>
+                    <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Documento</th>
+                    <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Número de Orden</th>
+                    <th className="text-left py-3 px-3 sm:py-4 sm:px-6 font-semibold text-slate-700 text-sm sm:text-base">Acciones</th>
                   </tr>
-                ) : (
-                  ordenes.map((orden, index) => (
-                    <tr
-                      key={String(orden.id)}
-                      className={`border-b border-slate-100 hover:bg-slate-50 transition-colors duration-200 ${index % 2 === 0 ? "bg-white" : "bg-slate-25"}`}
-                    >
-                      <td className="py-3 px-3 sm:py-4 sm:px-6">
+                </thead>
+                <tbody>
+                  {ordenes.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="px-6 py-8 text-center text-slate-500">
+                        No se encontraron órdenes
+                      </td>
+                    </tr>
+                  ) : (
+                    ordenes.map((orden, index) => (
+                      <tr
+                        key={String(orden.id)}
+                        className={`border-b border-slate-100 hover:bg-slate-50 transition-colors duration-200 ${index % 2 === 0 ? "bg-white" : "bg-slate-25"}`}
+                      >
+                        <td className="py-3 px-3 sm:py-4 sm:px-6">
+                          <input 
+                            type="checkbox" 
+                            checked={orden.selected}
+                            onChange={() => toggleSelection(orden.id)}
+                            className="rounded border-slate-300 text-teal-600 focus:ring-teal-400" 
+                          />
+                        </td>
+                        <td className="py-3 px-3 sm:py-4 sm:px-6">
+                          <div className="flex items-center space-x-1 sm:space-x-2">
+                            <div className="p-1 bg-slate-100 rounded-lg">
+                              <svg className="w-3 h-3 sm:w-4 sm:h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                />
+                              </svg>
+                            </div>
+                            <span className="text-slate-700 font-medium text-xs sm:text-sm">
+                              {orden.fecha ? new Date(orden.fecha).toLocaleDateString() : '-'}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-3 sm:py-4 sm:px-6 text-slate-600 text-xs sm:text-sm">{orden.documento ?? '-'}</td>
+                        <td className="py-3 px-3 sm:py-4 sm:px-6">
+                          <span className="bg-slate-100 text-slate-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-semibold">
+                            #{orden.numero ?? '-'}
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 sm:py-4 sm:px-6">
+                          <button
+                            onClick={() => viewResults(orden.id)}
+                            className="bg-teal-50 hover:bg-teal-100 text-teal-700 hover:text-teal-800 px-2 py-1 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 border border-teal-200 hover:border-teal-300"
+                          >
+                            Ver Resultados
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Vista de tarjetas para pantallas pequeñas */}
+            <div className="lg:hidden space-y-4 p-4">
+              {ordenes.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-slate-500">No se encontraron órdenes</p>
+                </div>
+              ) : (
+                ordenes.map((orden) => (
+                  <div key={String(orden.id)} className="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center space-x-2">
                         <input 
                           type="checkbox" 
                           checked={orden.selected}
                           onChange={() => toggleSelection(orden.id)}
                           className="rounded border-slate-300 text-teal-600 focus:ring-teal-400" 
                         />
-                      </td>
-                      <td className="py-3 px-3 sm:py-4 sm:px-6">
-                        <div className="flex items-center space-x-1 sm:space-x-2">
-                          <div className="p-1 bg-slate-100 rounded-lg">
-                            <svg className="w-3 h-3 sm:w-4 sm:h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
-                            </svg>
-                          </div>
-                          <span className="text-slate-700 font-medium text-xs sm:text-sm">
-                            {orden.fecha ? new Date(orden.fecha).toLocaleDateString() : '-'}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="py-3 px-3 sm:py-4 sm:px-6 text-slate-600 text-xs sm:text-sm">{orden.documento ?? '-'}</td>
-                      <td className="py-3 px-3 sm:py-4 sm:px-6">
-                        <span className="bg-slate-100 text-slate-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-semibold">
+                        <span className="bg-slate-100 text-slate-800 px-3 py-1 rounded-full text-sm font-semibold">
                           #{orden.numero ?? '-'}
                         </span>
-                      </td>
-                      <td className="py-3 px-3 sm:py-4 sm:px-6">
-                        <button
-                          onClick={() => viewResults(orden.id)}
-                          className="bg-teal-50 hover:bg-teal-100 text-teal-700 hover:text-teal-800 px-2 py-1 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 border border-teal-200 hover:border-teal-300"
-                        >
-                          <span className="hidden sm:inline">Ver Resultados</span>
-                          <span className="sm:hidden">Ver</span>
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+                      </div>
+                      <button
+                        onClick={() => viewResults(orden.id)}
+                        className="bg-teal-50 hover:bg-teal-100 text-teal-700 hover:text-teal-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 border border-teal-200 hover:border-teal-300"
+                      >
+                        Ver Resultados
+                      </button>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <div className="p-1 bg-white rounded-lg">
+                          <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-sm text-slate-600">Fecha:</span>
+                        <span className="text-sm font-medium text-slate-800">
+                          {orden.fecha ? new Date(orden.fecha).toLocaleDateString() : '-'}
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-2">
+                        <div className="p-1 bg-white rounded-lg">
+                          <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-sm text-slate-600">Documento:</span>
+                        <span className="text-sm font-medium text-slate-800">{orden.documento ?? '-'}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </>
         )}
       </div>
 

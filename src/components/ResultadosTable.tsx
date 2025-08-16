@@ -35,7 +35,8 @@ const ResultadosTable: React.FC<ResultadosTableProps> = ({
           {procedimiento && <p className="text-lg font-semibold text-slate-600">{procedimiento}</p>}
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Vista de tabla para pantallas grandes */}
+        <div className="hidden lg:block overflow-x-auto">
           <table className="w-full">
             <thead className="bg-slate-50">
               <tr>
@@ -92,6 +93,53 @@ const ResultadosTable: React.FC<ResultadosTableProps> = ({
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Vista de tarjetas para pantallas pequeñas */}
+        <div className="lg:hidden space-y-4">
+          {resultados.length === 0 ? (
+            <div className="text-center py-8 text-slate-500">
+              Sin resultados
+            </div>
+          ) : (
+            resultados.map((resultado, index) => (
+              <div key={String(resultado.id ?? index)} className="bg-slate-50 rounded-lg p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="bg-slate-100 text-slate-800 px-3 py-1 rounded-full text-sm font-semibold">
+                    {resultado.codigo ?? '-'}
+                  </span>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      String(resultado.resultado).toUpperCase() === "NEGATIVO"
+                        ? "bg-green-100 text-green-800"
+                        : String(resultado.resultado).toUpperCase() === "POSITIVO"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-slate-100 text-slate-800"
+                    }`}
+                  >
+                    {resultado.resultado ?? '-'}
+                  </span>
+                </div>
+                <div>
+                  <h4 className="font-medium text-slate-700 text-sm">{resultado.nombre ?? '-'}</h4>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <span className="text-slate-500 font-medium">Unidad:</span>
+                    <p className="text-slate-700">{resultado.unidad ?? '-'}</p>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 font-medium">Fecha:</span>
+                    <p className="text-slate-700">{resultado.fechaOrden ?? '-'}</p>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-slate-500 font-medium text-xs">Valores de Referencia:</span>
+                  <p className="text-slate-700 text-xs">{resultado.valoresReferencia ?? '-'}</p>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
