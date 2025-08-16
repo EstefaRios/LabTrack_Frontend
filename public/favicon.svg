@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>LabTrack Logo</title>
+  <defs>
+    <style>
+      .navy { fill:#0E3550; }
+      .mint { fill:#46D6B3; }
+      .text { font-family: "Inter", "Poppins", "Segoe UI", Arial, sans-serif; font-weight: 700; fill:#0E3550; }
+    </style>
+    <clipPath id="liquid-clip">
+      <!-- Inner flask cavity to clip the liquid -->
+      <path d="M180,700
+               C180,640 260,520 310,420
+               L310,320
+               Q310,300 330,300
+               L530,300
+               Q550,300 550,320
+               L550,420
+               C600,520 680,640 680,700
+               Q680,760 620,780
+               L240,780
+               Q180,760 180,700 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Bubbles above -->
+  <circle class="mint" cx="420" cy="150" r="28"/>
+  <circle class="mint" cx="380" cy="220" r="22"/>
+  <circle class="mint" cx="410" cy="290" r="16"/>
+
+  <!-- Flask outline (filled navy) -->
+  <path class="navy" d="M260,780
+                         Q160,780 160,690
+                         C160,620 250,500 300,410
+                         L300,320
+                         Q300,280 340,280
+                         L520,280
+                         Q560,280 560,320
+                         L560,410
+                         C610,500 700,620 700,690
+                         Q700,780 600,780
+                         Z"/>
+
+  <!-- Inner cavity (cut-out) -->
+  <path d="M240,760
+           Q200,750 200,700
+           C200,640 270,530 320,430
+           L320,320
+           Q320,310 330,310
+           L530,310
+           Q540,310 540,320
+           L540,430
+           C590,530 660,640 660,700
+           Q660,750 620,760
+           Z" fill="#FFFFFF"/>
+
+  <!-- Liquid (mint) clipped to inner cavity -->
+  <g clip-path="url(#liquid-clip)">
+    <path class="mint" d="M160,640 L720,640 L720,820 L160,820 Z"/>
+    <circle class="mint" cx="380" cy="620" r="38"/>
+    <circle class="mint" cx="410" cy="520" r="26"/>
+    <circle class="mint" cx="420" cy="450" r="18"/>
+  </g>
+
+  <!-- Small mint bubble inside neck -->
+  <circle class="mint" cx="430" cy="390" r="14"/>
+
+  <!-- Text -->
+  <text class="text" x="780" y="420" font-size="170">Lab</text>
+  <text class="text" x="720" y="600" font-size="170">Track</text>
+</svg>

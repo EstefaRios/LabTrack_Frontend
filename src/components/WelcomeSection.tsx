@@ -1,0 +1,68 @@
+"use client"
+
+import React, { useState, useEffect } from 'react';
+import { getPerfil } from '../api/paciente';
+import { getPersonaIdFromToken } from '../api/client';
+
+export default function WelcomeSection() {
+  const [sexoBiologico, setSexoBiologico] = useState<string | null>(null);
+  const [nombrePaciente, setNombrePaciente] = useState<string>('');
+
+  useEffect(() => {
+    const fetchPatientInfo = async () => {
+      const personaId = getPersonaIdFromToken();
+      if (!personaId) return;
+
+      try {
+        const perfil = await getPerfil(personaId);
+        setSexoBiologico(perfil?.sexo);
+        setNombrePaciente(perfil?.nombreCompleto || '');
+      } catch (error) {
+        console.error('Error al obtener información del paciente:', error);
+      }
+    };
+
+    fetchPatientInfo();
+  }, []);
+
+  const getGenderImage = () => {
+    if (sexoBiologico === 'Femenino' || sexoBiologico === 'F') {
+      return '/src/assets/images/Femenino.png';
+    } else if (sexoBiologico === 'Masculino' || sexoBiologico === 'M') {
+      return '/src/assets/images/Masculino.png';
+    }
+    return null;
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 mb-6">
+      <div className="flex items-center space-x-6">
+        <div className="w-32 h-24 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center">
+          {getGenderImage() ? (
+            <img 
+               src={getGenderImage()!} 
+               alt={sexoBiologico || 'Paciente'} 
+               className="w-20 h-20 object-contain"
+             />
+          ) : (
+            <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          )}
+        </div>
+
+        <div className="flex-1">
+          <div className="flex items-center space-x-3 mb-2">
+            <h2 className="text-2xl font-bold text-slate-800 profile-title-animate">Hola, {nombrePaciente}</h2>
+          </div>
+          <p className="text-slate-600 text-lg welcome-portal-animate">{sexoBiologico === 'Femenino' ? 'Bienvenida' : 'Bienvenido'} al portal</p>
+        </div>
+      </div>
+    </div>
+  );
+}

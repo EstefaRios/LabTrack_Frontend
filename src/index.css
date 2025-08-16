@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* Animación suave de zoom para el logo */
+@keyframes gentle-zoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.logo-animate {
+  animation: gentle-zoom 3s ease-in-out infinite;
+}
+
+/* Animación de brillo para texto */
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shine-text {
+  background: linear-gradient(
+    90deg,
+    #1e293b 25%,
+    #cbd5e1 50%,
+    #1e293b 75%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s ease-in-out infinite;
+}
+
+.typewriter-subtitle {
+  overflow: hidden;
+  border-right: 2px solid #64748b;
+  white-space: nowrap;
+  animation: 
+    typewriter 2.5s steps(35, end) 0s both,
+    blink-caret 0.75s step-end infinite 0s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(3px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.profile-title-animate {
+  opacity: 0;
+  animation: slideInFromLeft 1s ease-out forwards;
+}
+
+.name-animate {
+  opacity: 0;
+  animation: fadeInDown 1.2s ease-out 0.3s forwards;
+}
+
+.welcome-portal-animate {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #64748b;
+  }
+}
+
+.typewriter-finished {
+  border-right: none;
+  animation: none;
+}
+
+.typewriter-welcome {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
+  animation-fill-mode: forwards;
+}
+
+.typewriter-name {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
+  animation-fill-mode: forwards;
+}
