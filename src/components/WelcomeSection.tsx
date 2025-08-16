@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { getPerfil } from '../api/paciente';
 import { getPersonaIdFromToken } from '../api/client';
+import femeninoImg from '../assets/images/Femenino.png';
+import masculinoImg from '../assets/images/Masculino.png';
 
 export default function WelcomeSection() {
   const [sexoBiologico, setSexoBiologico] = useState<string | null>(null);
@@ -27,9 +29,9 @@ export default function WelcomeSection() {
 
   const getGenderImage = () => {
     if (sexoBiologico === 'Femenino' || sexoBiologico === 'F') {
-      return '/src/assets/images/Femenino.png';
+      return femeninoImg;
     } else if (sexoBiologico === 'Masculino' || sexoBiologico === 'M') {
-      return '/src/assets/images/Masculino.png';
+      return masculinoImg;
     }
     return null;
   };

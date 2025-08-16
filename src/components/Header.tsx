@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/auth.store';
 import { getPerfil } from '../api/paciente';
 import { getPersonaIdFromToken } from '../api/client';
+import labtrackLogo from '../assets/images/labtrack.png';
 
 interface HeaderProps {
   patientName?: string;
@@ -56,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ patientName = "Nombre paciente" }) => {
               className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
             >
               <img 
-                src="/src/assets/images/labtrack.png" 
+                src={labtrackLogo} 
                 alt="LabTrack Logo" 
                 className="w-full h-full object-contain logo-animate"
               />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { loginPaciente } from '../api/auth';
 import { useAuthStore } from '../store/auth.store';
+import labtrackLogo from '../assets/images/labtrack.png';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const LoginForm: React.FC = () => {
     <div className="w-full max-w-md shadow-2xl border border-blue-200/20 bg-white/95 backdrop-blur-lg relative z-10 rounded-lg">
       <div className="space-y-2 pb-4 p-6">
         <div className="flex justify-center lg:hidden mb-2">
-          <img src="/src/assets/images/labtrack.png" alt="LabTrack" className="h-12 w-auto rounded-lg" />
+          <img src={labtrackLogo} alt="LabTrack" className="h-12 w-auto rounded-lg" />
         </div>
 
         <div className="text-center lg:text-left">

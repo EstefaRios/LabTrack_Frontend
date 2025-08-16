@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginForm from '../../components/LoginForm';
 import { DNAParticles } from '../../components/DNAParticles';
+import labtrackLogo from '../../assets/images/labtrack.png';
 
 const LoginPage: React.FC = () => {
   return (
@@ -85,7 +86,7 @@ const LoginPage: React.FC = () => {
         <div className="hidden lg:flex flex-col justify-center space-y-8 px-8">
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
-              <img src="/src/assets/images/labtrack.png" alt="LabTrack" className="h-20 w-auto rounded-lg img-animate" />
+              <img src={labtrackLogo} alt="LabTrack" className="h-20 w-auto rounded-lg img-animate" />
               <div className="text-slate-600 text-base font-medium font-sans opacity-90">
                 Innovación y salud, siempre contigo
               </div>
